@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Input ,message } from "antd";
 import { Link ,useNavigate } from "react-router-dom";
 import { LoginUser } from "../../calls/User";
+import { axiosInstance } from "../../calls";
 
 const Login = () => {
 
     const navigate = useNavigate()
+
+    useEffect(()=>{
+          if(sessionStorage.getItem("token")){
+            navigate("/")
+          }
+    },[])
 
   const onFinish = async (values) => {
     try {
@@ -13,7 +20,7 @@ const Login = () => {
       if (response.success) {
         message.success(response.message);
         sessionStorage.setItem("token",response.data)
-
+        axiosInstance.defaults.headers["Authorization"] = `Bearer ${response.data}`;
         navigate("/")
       } else {
         message.error(response.message);

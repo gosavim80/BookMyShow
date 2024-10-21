@@ -1,8 +1,19 @@
 import React from 'react'
+import { useEffect , useState } from 'react'
+import { Button } from 'antd'
 
 const Home = () => {
+
+ 
+ 
+  
   return (
-    <div>Home</div>
+    <div>
+
+    <h1>
+   Hello Home
+    </h1>
+    </div>
   )
 }
 
